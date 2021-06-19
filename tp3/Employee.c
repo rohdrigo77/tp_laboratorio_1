@@ -249,7 +249,7 @@ int employee_sortId(void* e1, void* e2)
     Employee* empleadoUno;
     Employee* empleadoDos;
 
-	if(empleadoUno != NULL && empleadoDos != NULL)
+	if(e1 != NULL && e2 != NULL)
 	{
 		empleadoUno=(Employee*) e1;
 		empleadoDos=(Employee*) e2;
