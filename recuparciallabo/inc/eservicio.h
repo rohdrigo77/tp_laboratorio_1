@@ -29,8 +29,8 @@ typedef struct{
 void InicializarServicios(eServicio listaServicios[], int tamServicios);
 /**
  * @fn int BuscarLibreServicios(eServicio[], int)
- * @brief busca en el array listaServicios una posición que tenga el campo estadoServicio = 0 ó -1, asignando -1 a indexBL si
- * no fue exitosa la búsqueda o una posición si lo fue.
+ * @brief busca en el array listaServicios una posicion que tenga el campo estadoServicio = 0 ó -1, asignando -1 a indexBL si
+ * no fue exitosa la busqueda o una posicion si lo fue.
  *
  * @param listaServicios
  * @param tamServicios

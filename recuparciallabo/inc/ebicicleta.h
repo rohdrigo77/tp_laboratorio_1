@@ -25,8 +25,8 @@ typedef struct {
 void InicializarBicicletas(eBicicleta listaBicicletas[], int tamB);
 /**
  * @fn int BuscarLibreBicicletas(eBicicleta[], int)
- * @brief busca en el array listaBicicletas una posición que tenga el campo estadoBicicleta = 0 ó -1, asignando -1 a indexBL si
- * no fue exitosa la búsqueda o una posición si lo fue.
+ * @brief busca en el array listaBicicletas una posicion que tenga el campo estadoBicicleta = 0 o -1, asignando -1 a indexBL si
+ * no fue exitosa la busqueda o una posicion si lo fue.
  *
  * @param listaBicicletas
  * @param tamB
@@ -64,7 +64,16 @@ int ValidarArrayOcupadoBicicletas(eBicicleta listaBicicletas[], int tamB);
  * @return
  */
 eBicicleta PedirBicicleta(int indexBici, int tamB, int minID, int maxMarca, int maxColor);
-
+/**
+ * @fn int ValidarBicicletaRoja(eBicicleta miBicicleta);
+ *
+ * @brief Valida si la bicicleta recibida es roja
+ *
+ * @param miBicicleta
+ *
+ * @return estado (1 si la bicicleta es roja,
+ * 					-1 si no)
+ */
 int ValidarBicicletaRoja(eBicicleta miBicicleta);
 
 

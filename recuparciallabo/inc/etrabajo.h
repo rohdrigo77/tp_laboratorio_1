@@ -32,8 +32,8 @@ void InicializarTrabajos(eTrabajo listaTrabajos[], int tamT);
 
 /**
  * @fn int BuscarLibreTrabajos(eTrabajo[], int)
- * @brief busca en el array listaTrabajos una posición que tenga el campo estadoTrabajo = 0 ó -1, asignando -1 a indexBL si
- * no fue exitosa la búsqueda o una posición si lo fue.
+ * @brief busca en el array listaTrabajos una posicion que tenga el campo estadoTrabajo = 0 ó -1, asignando -1 a indexBL si
+ * no fue exitosa la busqueda o una posicion si lo fue.
  *
  * @param listaTrabajos
  * @param tamT
@@ -61,7 +61,7 @@ int BuscarIDTrabajos(eTrabajo listaTrabajos[], int tamT, int idTrabajo);
 int ValidarArrayOcupadoTrabajos(eTrabajo listaTrabajos[], int tamT);
 /**
  * @fn int ValidarParaDarDeBajaTrabajo(eTrabajo)
- * @brief solicita confirmación para dar de baja un producto, si se responde 's', se asigna 1 a estado, caso contrario, se le asigna -1
+ * @brief solicita confirmacion para dar de baja un producto, si se responde 's', se asigna 1 a estado, caso contrario, se le asigna -1
  *
  * @param TrabajoADarDeBaja
  * @return estado

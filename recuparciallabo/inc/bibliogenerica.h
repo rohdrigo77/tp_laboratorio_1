@@ -121,7 +121,8 @@ float CalcularPromedio(float precioTotal, int cantidadTotal);
  *
  * @param mensajeInicial
  * @param mensajeError
- * @return
+ * @return estado (1 si se ingreso 's',
+ * 					-1 si se ingreso 'n')
  */
 int PedirConfirmacion(char mensajeInicial[], char mensajeError[]);
 
