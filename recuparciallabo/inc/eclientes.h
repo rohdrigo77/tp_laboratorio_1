@@ -72,4 +72,7 @@ void ImprimirUnCliente(eCliente miCliente);
  */
 void HardcodeoDatosClientes(eCliente listaClientes[], int tamC, int minId);
 
+void ImprimirAcumulacionCliente(int idCliente, char descripcionCliente[], float acumulacionCliente);
+
+
 #endif /* ECLIENTES_H_ */

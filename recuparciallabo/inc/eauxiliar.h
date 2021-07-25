@@ -8,6 +8,8 @@
 #ifndef EAUXILIAR_H_
 #define EAUXILIAR_H_
 #include "../inc/nexo.h"
+#define MENORAMAYOR 0
+#define MAYORAMENOR 1
 
 
 typedef struct {
@@ -44,6 +46,9 @@ void ImprimirAuxiliares(eAuxiliar listaAuxiliar[], int tamAuxiliar);
  * @param miAuxiliar
  */
 void ImprimirUnAuxiliar(eAuxiliar miAuxiliar);
+
+int MostrarAuxiliarConMayorContador(eAuxiliar auxLista[],int tamL,int maximoContador, char mensaje[]);
+
 
 
 #endif /* EAUXILIAR_H_ */

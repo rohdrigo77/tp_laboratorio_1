@@ -433,68 +433,51 @@ int ServicioConMasTrabajosRealizados(eTrabajo listaTrabajos[],eServicio listaSer
 {
 	int estado = -1;
 	int idServicio;
+	int idAuxiliar;
 	int i;
-	eAuxiliar servicioLimpieza;
-	eAuxiliar servicioParche;
-	eAuxiliar servicioCentrado;
-	eAuxiliar servicioCadena;
+	int j;
+	int maximosTrabajosRealizados;
+	eAuxiliar auxServicios[tamS];
+	eAuxiliar unAuxiliar;
 
-	servicioLimpieza.contador = 0;
-	strcpy(servicioLimpieza.descripcion,"Limpieza");
-	servicioParche.contador = 0;
-	strcpy(servicioParche.descripcion,"Parche");
-	servicioCentrado.contador = 0;
-	strcpy(servicioCentrado.descripcion,"Centrado");
-	servicioCadena.contador = 0;
-	strcpy(servicioCadena.descripcion,"Cadena");
+	for (i=0;i<tamS;i++)
+	{
+		auxServicios[i].idAuxiliar = listaServicios[i].idServicio;
+		auxServicios[i].contador = 0;
+		strcpy(auxServicios[i].descripcion,listaServicios[i].descripcion);
+	}
 
 	for (i=0;i<tamT;i++)
 	{
-		idServicio = listaTrabajos[i].idServicio;
+		idServicio = BuscarIDServicios(listaServicios, tamS, listaTrabajos[i].idServicio);
 
-		//printf("id servicio: %d \n",listaTrabajos[i].idServicio);
-
-		switch (idServicio)
+		if (idServicio >=0)
 		{
-			case 20000:
-				servicioLimpieza.contador++;
-				break;
-			case 20001:
-				servicioParche.contador++;
-				break;
-			case 20002:
-				servicioCentrado.contador++;
-				break;
-			case 20003:
-				servicioCadena.contador++;
-				break;
+			idAuxiliar = BuscarIDAuxiliares(auxServicios,tamS,listaServicios[idServicio].idServicio);
+			if (idServicio >=0)
+			{
+				auxServicios[idAuxiliar].contador++;
+			}
 		}
-
-		estado = 1;
-
 	}
 
-	if ( servicioLimpieza.contador >= servicioParche.contador && servicioLimpieza.contador >= servicioCentrado.contador && servicioLimpieza.contador >= servicioCadena.contador)
+	for(i=0;i<tamS;i++)
 	{
-		printf("El servicio con más trabajos realizados es el de %s con %d trabajos cargados.\n",servicioLimpieza.descripcion,servicioLimpieza.contador);
+		for (j=i+1;j<tamS;j++)
+		{
+			if (auxServicios[i].contador < auxServicios[j].contador)
+			{
+				unAuxiliar = auxServicios[i];
+				auxServicios[i] = auxServicios[j];
+				auxServicios[j] = unAuxiliar;
+
+			}
+		}
 	}
 
-	if (servicioParche.contador >= servicioLimpieza.contador &&  servicioParche.contador >= servicioCentrado.contador && servicioParche.contador >= servicioCadena.contador)
-	{
-		printf("El servicio con más trabajos realizados es el de %s con %d trabajos cargados.\n",servicioParche.descripcion,servicioParche.contador);
-	}
+	maximosTrabajosRealizados = auxServicios[0].contador;
 
-	if (servicioCentrado.contador >= servicioParche.contador && servicioCentrado.contador >= servicioLimpieza.contador && servicioCentrado.contador >= servicioCadena.contador)
-	{
-		printf("El servicio con más trabajos realizados es el de %s con %d trabajos cargados.\n",servicioCentrado.descripcion,servicioCentrado.contador);
-	}
-
-	if (servicioCadena.contador >= servicioParche.contador && servicioCadena.contador >= servicioCentrado.contador && servicioCadena.contador  >= servicioLimpieza.contador)
-	{
-		printf("El servicio con más trabajos realizados es el de %s con %d trabajos cargados.\n",servicioLimpieza.descripcion,servicioLimpieza.contador);
-	}
-
-
+	estado = MostrarAuxiliarConMayorContador(auxServicios,tamS,maximosTrabajosRealizados,"Servicio/s con más trabajos realizados:");
 
 	return estado;
 
@@ -539,49 +522,63 @@ int CantidadBicicletasColorRojoPorServicio(eTrabajo listaTrabajos[],eServicio li
 	int estado = -1;
 	int indexBici;
 	int indexServicios;
+	int idServicioEnTrabajo;
+	int idBiciEnTrabajo;
 	int opcion;
 	int validacion;
 	int cantBicicletasRojas = 0;
 	int i;
+	int contadorValidador = 0;
 
-	opcion = PedirEntero("Elija un servicio:\n1.LIMPIEZA\n2.PARCHE\n3.CENTRADO\n4.CADENA\n","Dato ingresado no válido");
-
-	estado = ValidarEnteroConRango(opcion,1,4);
-
-	if (estado >0)
+	do
 	{
-		switch (opcion)
-		{
-			case 1:
-				opcion = 20000;
-				break;
-			case 2:
-				opcion = 20001;
-				break;
-			case 3:
-				opcion = 20002;
-				break;
-			default:
-				opcion = 20003;
-				break;
-		}
+		ImprimirServicios(listaServicios,tamS);
 
-		for (i=0;i<tamT;i++)
+		opcion = PedirEntero("Ingrese ID SERVICIO:\n","Dato ingresado no válido");
+
+		indexServicios = BuscarIDServicios(listaServicios,tamS,opcion);
+
+		if (indexServicios >= 0)
 		{
-			if(listaTrabajos[i].idServicio == opcion)
+
+			for (i=0;i<tamT;i++)
 			{
-				indexServicios = BuscarIDServicios(listaServicios,tamS,opcion);
-				indexBici = BuscarIDBicicletas(listaBicicletas,tamB,listaTrabajos[i].idBicicleta);
-				validacion = ValidarBicicletaRoja(listaBicicletas[indexBici]);
-				if(validacion > 0)
+				idServicioEnTrabajo = listaTrabajos[i].idServicio;
+
+				if (opcion == idServicioEnTrabajo)
 				{
-					cantBicicletasRojas++;
+					idBiciEnTrabajo = listaTrabajos[i].idBicicleta;
+					indexBici = BuscarIDBicicletas(listaBicicletas,tamB,idBiciEnTrabajo);
+					printf("indexBici: %d \n",indexBici);
+					validacion = ValidarBicicletaRoja(listaBicicletas[indexBici]);
+
+					if(validacion > 0)
+					{
+						cantBicicletasRojas++;
+					}
+
 				}
 			}
+			printf("La cantidad de bicicletas rojas a las que se les hizo el servicio de %s es de: %d. \n",listaServicios[indexServicios].descripcion,cantBicicletasRojas);
+			break;
 		}
-	}
+		else
+		{
+			printf("ID SERVICIO Ingresado no existe. Verifique su elección y reintente. \n");
+			contadorValidador++;
 
-	printf("La cantidad de bicicletas rojas a las que se les hizo el servicio de %s es de: %d. \n",listaServicios[indexServicios].descripcion,cantBicicletasRojas);
+
+		}
+	}while(contadorValidador < 3);
+
+	if (contadorValidador >=3)
+	{
+		printf("Se alcanzó el número máximo de intentos. \n");
+	}
+	else
+	{
+		estado = 1;
+	}
 
 	return estado;
 
@@ -807,15 +804,12 @@ int TotalServiciosPorCliente(eTrabajo listaTrabajos[],eServicio listaServicios[]
 	{
 		if(i==0)
 		{
-			printf("|------------------------------------|\n");
-			printf("| ID CLIENTE | N Y A CLIENTE | TOTAL |\n");
-			printf("|____________|_______________|_______|\n");
+			ImprimirEncabezado();
 		}
 
 		if(idBicicleta == listaBicicletas[indexBici].idBicicleta)
 		{
-			printf("| %d | %s | $%f |\n",auxCliente[i].idAuxiliar,auxCliente[i].descripcion,auxCliente[i].acumulador);
-			printf("|---------------|\n");
+			ImprimirAcumulacionCliente(auxCliente[i].idAuxiliar,auxCliente[i].descripcion,auxCliente[i].acumulador);
 		}
 		estado = 1;
 
@@ -826,3 +820,13 @@ int TotalServiciosPorCliente(eTrabajo listaTrabajos[],eServicio listaServicios[]
 
 	return estado;
 }
+
+void ImprimirEncabezado()
+{
+	printf("|------------------------------------|\n");
+	printf("| ID CLIENTE | N Y A CLIENTE | TOTAL |\n");
+	printf("|____________|_______________|_______|\n");
+}
+
+
+

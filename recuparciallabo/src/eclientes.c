@@ -103,3 +103,9 @@ void HardcodeoDatosClientes(eCliente listaClientes[], int tamC, int minId)
 
     printf("Hardcodeado con exito \n");
 }
+
+void ImprimirAcumulacionCliente(int idCliente, char descripcionCliente[], float acumulacionCliente)
+{
+	printf("| %d | %s | $%f |\n",idCliente,descripcionCliente,acumulacionCliente);
+	printf("|---------------|\n");
+}

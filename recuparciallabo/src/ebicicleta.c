@@ -145,17 +145,20 @@ eBicicleta PedirBicicleta(int indexBici, int tamB, int minID, int maxMarca, int 
 int ValidarBicicletaRoja(eBicicleta miBicicleta)
 {
 	int estado = 1;
-	char rojo[10] = "rojo";
+
 	int validacion;
 
-	validacion = strcmp(miBicicleta.colorBicicleta,rojo);
+	validacion = strcmp(miBicicleta.colorBicicleta,"rojo");
 
 	if (validacion != 0)
 	{
 		estado = -1;
 	}
+	printf("estado validacion: %d \n",estado);
 
 	return estado;
 }
+
+
 
 

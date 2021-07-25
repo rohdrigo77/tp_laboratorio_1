@@ -47,3 +47,21 @@ void ImprimirUnAuxiliar(eAuxiliar miAuxiliar)
 			miAuxiliar.descripcion
 			);
 }
+
+int MostrarAuxiliarConMayorContador(eAuxiliar auxLista[],int tamL,int maximoContador, char mensaje[])
+{
+	int estado = -1;
+	int i;
+
+	for (i=0;i<tamL;i++)
+	{
+		if (auxLista[i].contador == maximoContador)
+		{
+			printf("%s\n",mensaje);
+			printf("Descripcion: %s --- Contador: %d\n",auxLista[i].descripcion, auxLista[i].contador);
+			estado =1;
+		}
+	}
+
+	return estado;
+}

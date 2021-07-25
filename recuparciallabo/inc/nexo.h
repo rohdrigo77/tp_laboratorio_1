@@ -8,6 +8,7 @@
 #ifndef NEXO_H_
 #define NEXO_H_
 
+
 #include "../inc/bibliogenerica.h"
 #include "../inc/etrabajo.h"
 #include "../inc/eservicio.h"
@@ -15,6 +16,7 @@
 #include "../inc/eauxiliar.h"
 #include "../inc/ebicicleta.h"
 #include "../inc/eclientes.h"
+
 
 /**
  * @fn int CargarTrabajo(eTrabajo[], eServicio[], eFecha[], int, int, int, int, int, int)
@@ -243,7 +245,7 @@ int ListarTrabajosSegunCliente(eTrabajo listaTrabajos[],eServicio listaServicios
 /**
  * @fn int TotalServiciosPorCliente(eTrabajo listaTrabajos[],eServicio listaServicios[],eBicicleta listaBicicletas[],eCliente listaClientes[],int tamT,int tamS, int tamB, int tamC, int maxDescripcion, int maxMarca, int maxColor, int maxNombre, int maxApellido);
  *
- * @brief calcula y lista el total de lo que deben los usuarios
+ * @brief calcula y lista el total de lo que deben los clientes
  * @param listaTrabajos
  * @param listaServicios
  * @param listaBicicletas
@@ -260,7 +262,10 @@ int ListarTrabajosSegunCliente(eTrabajo listaTrabajos[],eServicio listaServicios
  * @return estado (-1 si hubo algun inconveniente, 1 si se tuvo exito)
  */
 int TotalServiciosPorCliente(eTrabajo listaTrabajos[],eServicio listaServicios[],eBicicleta listaBicicletas[],eCliente listaClientes[],int tamT,int tamS, int tamB, int tamC, int maxDescripcion, int maxMarca, int maxColor, int maxNombre, int maxApellido);
-
+/**
+ *
+ */
+void ImprimirEncabezado();
 
 
 #endif /* NEXO_H_ */
